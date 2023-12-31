@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head></head>
-  <body>
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v18.0&appId=2260734627455048" nonce="AJbWfx8A"></script>
+  <body>    
     <h2>Add Facebook Login to your webpage</h2>
 
       <!-- Set the element id for the JSON response -->
@@ -15,6 +13,15 @@
       <script>
   
         <!-- Add the Facebook SDK for Javascript -->          
+        
+        (function(d, s, id){
+                              var js, fjs = d.getElementsByTagName(s)[0];
+                              if (d.getElementById(id)) {return;}
+                              js = d.createElement(s); js.id = id;
+                              js.src = "https://connect.facebook.net/en_US/sdk.js";
+                              fjs.parentNode.insertBefore(js, fjs);
+                            }(document, 'script', 'facebook-jssdk')
+        ); 
 
         window.fbAsyncInit = function() {
             // <!-- Initialize the SDK with your app and the Graph API version for your app -->
