@@ -51,7 +51,7 @@
                           //  <!-- If you are not logged in, the login dialog will open for you to login asking for permission to get your public profile and email -->
                            console.log('User cancelled login or did not fully authorize.'); }
             });
-        }
+         }, {scope: 'email,user_likes'});
 
 
         function fb_logout(){
