@@ -40,10 +40,11 @@
 
         function fb_login(){
           FB.login(function(response) {
+                  console.log(response);
                       if (response.authResponse) {
                            console.log('Welcome!  Fetching your information.... ');
                            FB.api('/me', {fields: 'name, email'}, function(response) {
-                               console.log(response);
+                               
                                document.getElementById("profile").innerHTML = "Good to see you, " + response.name + ". i see your email address is " + response.email
                            });
                       } else { 
