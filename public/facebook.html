@@ -9,6 +9,8 @@
     
       <p id="profile"></p>
 
+      <button onclick="fb_login()">Login with facebook</button>
+
       <script>
   
         <!-- Add the Facebook SDK for Javascript -->
@@ -27,11 +29,16 @@
             // <!-- Initialize the SDK with your app and the Graph API version for your app -->
             FB.init({
                       appId            : '2260734627455048',
+                      cookie           : true,
                       xfbml            : true,
                       version          : 'v18.0'
                     });
             // <!-- If you are logged in, automatically get your name and email adress, your public profile information -->
-            FB.login(function(response) {
+            
+        };
+
+        function fb_login(){
+          FB.login(function(response) {
                       if (response.authResponse) {
                            console.log('Welcome!  Fetching your information.... ');
                            FB.api('/me', {fields: 'name, email'}, function(response) {
@@ -41,7 +48,11 @@
                           //  <!-- If you are not logged in, the login dialog will open for you to login asking for permission to get your public profile and email -->
                            console.log('User cancelled login or did not fully authorize.'); }
             });
-        };
+        }
+        
+
+
+        
 
       </script>
 
