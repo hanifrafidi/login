@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head></head>
-  <body>    
+  <body>
+
     <h2>Add Facebook Login to your webpage</h2>
 
       <!-- Set the element id for the JSON response -->
@@ -10,10 +11,11 @@
 
       <button onclick="fb_login()">Login with facebook</button>
 
+      <button onclick="fb_logout()">Logout facebook</button>
       <script>
   
-        <!-- Add the Facebook SDK for Javascript -->          
-        
+        <!-- Add the Facebook SDK for Javascript -->
+  
         (function(d, s, id){
                               var js, fjs = d.getElementsByTagName(s)[0];
                               if (d.getElementById(id)) {return;}
@@ -21,7 +23,8 @@
                               js.src = "https://connect.facebook.net/en_US/sdk.js";
                               fjs.parentNode.insertBefore(js, fjs);
                             }(document, 'script', 'facebook-jssdk')
-        ); 
+        );
+
 
         window.fbAsyncInit = function() {
             // <!-- Initialize the SDK with your app and the Graph API version for your app -->
@@ -45,6 +48,13 @@
                           //  <!-- If you are not logged in, the login dialog will open for you to login asking for permission to get your public profile and email -->
                            console.log('User cancelled login or did not fully authorize.'); }
             });
+        }
+
+
+        function fb_logout(){
+          FB.logout(function(response) {
+            // user is now logged out
+          });
         }
         
 
