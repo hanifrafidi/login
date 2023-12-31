@@ -55,6 +55,7 @@
         function fb_logout(){
           FB.logout(function(response) {
             // user is now logged out
+            document.getElementById("profile").innerHTML = "see you again"
           });
         }
         
