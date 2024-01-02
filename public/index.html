@@ -7,8 +7,7 @@
   <link rel="stylesheet" type="text/css" href="output.css" >
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />  
   
-  <script src="https://accounts.google.com/gsi/client" onload="console.log('TODO: add onload function')">
-  </script>  
+  
 </head>
 <body>
   
@@ -31,6 +30,8 @@
 </body>
 
 <!-- google login code -->
+<script src="https://accounts.google.com/gsi/client" onload="console.log('TODO: add onload function')">
+</script>  
 <script>
   const client = google.accounts.oauth2.initCodeClient({
     client_id: '353389008600-n0igs2s58igstkdkp9ckb5v53d9tq6eu.apps.googleusercontent.com',
@@ -73,22 +74,24 @@
     window.fbAsyncInit = function() {
         // <!-- Initialize the SDK with your app and the Graph API version for your app -->
         FB.init({
-                  appId            : '2260734627455048',                      
+                  appId            : '2260734627455048',               
                   xfbml            : true,
                   version          : 'v18.0'
                 });
-        // <!-- If you are logged in, automatically get your name and email adress, your public profile information -->
+        
         
     };
 
+    // If you are logged in, automatically get your name and email adress, your public profile information -->
     function fb_login(){
       FB.login(function(response) {
                   if (response.authResponse) {
                        console.log('Welcome!  Fetching your information.... ');
-                       FB.api('/me', {fields: 'name, email'}, function(response) {
-                           console.log(response)
-                        //    document.getElementById("profile").innerHTML = "Good to see you, " + response.name + ". i see your email address is " + response.email
-                           window.location.replace("dashboard.html#fb_name=" + response.name);
+                       FB.api('/me', {fields: 'name, email'}, function(response) {                                                   
+                      
+                        //  redirect to dashboard page after success login
+                       window.location.replace("dashboard.html#fb_name=" + response.name);
+
                        });
                   } else { 
                       //  <!-- If you are not logged in, the login dialog will open for you to login asking for permission to get your public profile and email -->
@@ -97,11 +100,7 @@
     }
 
 
-    function fb_logout(){
-      FB.logout(function(response) {
-        // user is now logged out
-      });
-    }
+    
         
   </script>
 </html>

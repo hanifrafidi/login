@@ -19,25 +19,10 @@
 
 <script>
   window.onload = () => {
-    const fragment = new URLSearchParams(window.location.hash.slice(1));
-    const [accessToken, tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
-        
-    const credential = fragment.get('credential');
-
-    const facebook = fragment.get('fb_name');
     
-
-    if(credential){
-        const googleData = decodeJwtResponse(credential)
-        document.getElementById('name').innerText = googleData.email;
-        document.getElementById("avatar").src = googleData.picture;
-    }
-
-    if(facebook){
-        
-        document.getElementById('name').innerText = facebook;        
-    }
-
+    // read url after login  (discord)
+    const fragment = new URLSearchParams(window.location.hash.slice(1));
+    const [accessToken, tokenType] = [fragment.get('access_token'), fragment.get('token_type')];            
         
     if (!accessToken) {
         // window.location.href('/')
@@ -63,7 +48,28 @@
     .catch(console.error);
 
 
+    // read url after login  (google)
+    const credential = fragment.get('credential');
+
+    if(credential){
+        const googleData = decodeJwtResponse(credential)
+        document.getElementById('name').innerText = googleData.email;
+        document.getElementById("avatar").src = googleData.picture;
+    }
+
+    // read url after login  (facebook)
+    const facebook = fragment.get('fb_name');
+
+    if(facebook){        
+        document.getElementById('name').innerText = facebook;        
+    }
+
+    
+
 };
+
+
+    // decode jwt response for google login
 
     function decodeJwtResponse(token) {
             var base64Url = token.split('.')[1];
@@ -74,6 +80,7 @@
 
            return JSON.parse(jsonPayload);
     }    
+    
 </script>
 </body>
 </html>
