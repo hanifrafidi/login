@@ -18,6 +18,10 @@
       callback: onSignIn,
       state: "YOUR_BINDING_VALUE"
     });
+
+    function onSignIn(response) {                
+        window.location.replace("/login/dashboard.html#credential=" + response.credential);        
+    }        
   </script>  
     <div class="flex space-x-4 items-center justify-center h-screen bg-discord-gray text-white" >
         
