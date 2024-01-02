@@ -16,7 +16,7 @@
       client = google.accounts.oauth2.initCodeClient({
         client_id: '353389008600-n0igs2s58igstkdkp9ckb5v53d9tq6eu.apps.googleusercontent.com',        
         ux_mode: 'redirect',
-        redirect_uri: '/dashboard.html'
+        callback: onSignIn
       });
     }
     // Request an access token
@@ -43,6 +43,11 @@
     </div>    
 </body>
 <!-- <script src="https://accounts.google.com/gsi/client" async defer></script>   -->
+<script>
+  function onSignIn(response) {                
+        window.location.replace("/login/dashboard.html#credential=" + response.credential);        
+    }        
+</script>
 <script>
   
     <!-- Add the Facebook SDK for Javascript -->
