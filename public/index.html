@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <base href="/">
-  <link rel="stylesheet" type="text/css" href="output.css" >
+  <base href="/">  
   <link rel="stylesheet" type="text/css" href="/login/public/output.css" >
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />  
+  <script src="https://accounts.google.com/gsi/client" async defer></script>  
 </head>
 <body>
     <div class="flex space-x-4 items-center justify-center h-screen bg-discord-gray text-white" >
@@ -16,12 +15,16 @@
             <span>Login with Discord</span>
         </a> -->
         <a id="login" 
-            href="https://discord.com/api/oauth2/authorize?client_id=1190562511582408744&response_type=token&redirect_uri=https%3A%2F%2Floginpagess.vercel.app%2Fdashboard.html&scope=identify" 
-            class="bg-discord-blue  text-xl px-5 py-3 rounded-md font-bold flex items-center space-x-4 hover:bg-gray-600 transition duration-75"><i class="fa-brands fa-discord text-2xl"></i>
-            <!-- <span>Login with Discord</span> -->
+          href="https://discord.com/api/oauth2/authorize?client_id=1190562511582408744&response_type=token&redirect_uri=https%3A%2F%2Floginpagess.vercel.app%2Fdashboard.html&scope=identify" 
+          class="bg-discord-blue  text-xl px-5 py-3 rounded-md font-bold flex items-center space-x-4 hover:bg-gray-600 transition duration-75"><i class="fa-brands fa-discord text-2xl"></i>
+          <!-- <span>Login with Discord</span> -->
         </a>
+
+        <button class="bg-facebook text-xl px-5 py-3 rounded-md font-bold flex items-center space-x-4 hover:bg-gray-600 transition duration-75" onclick="fb_login()"> <i class="fa-brands fa-facebook text-2xl"></i></button>
         
-        <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <button class="bg-google text-xl px-5 py-3 rounded-md font-bold flex items-center space-x-4 hover:bg-gray-600 transition duration-75" onclick="fb_login()"> <i class="fa-brands fa-google text-2xl" style="color: #ffffff; "></i></button>                
+        
+        
         <div id="g_id_onload"
             data-client_id="353389008600-n0igs2s58igstkdkp9ckb5v53d9tq6eu.apps.googleusercontent.com"
             data-callback="onSignIn"       
@@ -35,13 +38,63 @@
             data-text="signin_with"
             data-size="large"
          ></div>        
-    </div>
-
-    
+    </div>    
 </body>
 <script>
     function onSignIn(response) {                
-        window.location.replace("/dashboard.html#credential=" + response.credential);        
+        window.location.replace("/login/dashboard.html#credential=" + response.credential);        
     }        
 </script>
+<script>
+  
+    <!-- Add the Facebook SDK for Javascript -->
+
+    (function(d, s, id){
+                          var js, fjs = d.getElementsByTagName(s)[0];
+                          if (d.getElementById(id)) {return;}
+                          js = d.createElement(s); js.id = id;
+                          js.src = "https://connect.facebook.net/en_US/sdk.js";
+                          fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk')
+    );
+
+
+    window.fbAsyncInit = function() {
+        // <!-- Initialize the SDK with your app and the Graph API version for your app -->
+        FB.init({
+                  appId            : '2260734627455048',                      
+                  xfbml            : true,
+                  version          : 'v18.0'
+                });
+        // <!-- If you are logged in, automatically get your name and email adress, your public profile information -->
+        
+    };
+
+    function fb_login(){
+      FB.login(function(response) {
+                  if (response.authResponse) {
+                       console.log('Welcome!  Fetching your information.... ');
+                       FB.api('/me', {fields: 'name, email'}, function(response) {
+                           console.log(response)
+                        //    document.getElementById("profile").innerHTML = "Good to see you, " + response.name + ". i see your email address is " + response.email
+                           window.location.replace("/login/dashboard.html#fb=" + response);
+                       });
+                  } else { 
+                      //  <!-- If you are not logged in, the login dialog will open for you to login asking for permission to get your public profile and email -->
+                       console.log('User cancelled login or did not fully authorize.'); }
+        });
+    }
+
+
+    function fb_logout(){
+      FB.logout(function(response) {
+        // user is now logged out
+      });
+    }
+    
+
+
+    
+
+  </script>
 </html>
