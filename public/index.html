@@ -14,9 +14,18 @@
     const client = google.accounts.oauth2.initCodeClient({
       client_id: '353389008600-n0igs2s58igstkdkp9ckb5v53d9tq6eu.apps.googleusercontent.com',
       scope: 'https://www.googleapis.com/auth/calendar.readonly',
-      ux_mode: 'redirect',
-      callback: onSignIn,
-      state: "YOUR_BINDING_VALUE"
+      ux_mode: 'popup',
+      callback: (response) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', code_receiver_uri, true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        // Set custom header for CRSF
+        xhr.setRequestHeader('X-Requested-With', 'XmlHttpRequest');
+        xhr.onload = function() {
+          console.log('Auth code response: ' + xhr.responseText);
+        };
+        xhr.send('code=' + response.code);
+      },
     });
 
     function onSignIn(response) {                
