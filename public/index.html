@@ -6,7 +6,8 @@
   <base href="/">  
   <link rel="stylesheet" type="text/css" href="output.css" >
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />  
-  
+  <meta name="google-signin-client_id" content="353389008600-n0igs2s58igstkdkp9ckb5v53d9tq6eu.apps.googleusercontent.com">
+
 </head>
 <body>
     <div class="flex space-x-4 items-center justify-center h-screen bg-discord-gray text-white" >
@@ -22,7 +23,7 @@
 
         <button class="bg-facebook text-xl px-5 py-3 rounded-md font-bold flex items-center space-x-4 hover:bg-gray-600 transition duration-75" onclick="fb_login()"> <i class="fa-brands fa-facebook text-2xl"></i></button>
         
-<!--         <button class="bg-google text-xl px-5 py-3 rounded-md font-bold flex items-center space-x-4 hover:bg-gray-600 transition duration-75" onclick="fb_login()"> <i class="fa-brands fa-google text-2xl" style="color: #ffffff; "></i></button>                 -->
+        <button id="signinButton" class="bg-google text-xl px-5 py-3 rounded-md font-bold flex items-center space-x-4 hover:bg-gray-600 transition duration-75" onclick="fb_login()"> <i class="fa-brands fa-google text-2xl" style="color: #ffffff; "></i></button>                
         
         
         <div id="g_id_onload"
@@ -42,9 +43,17 @@
 </body>
 <script src="https://accounts.google.com/gsi/client" async defer></script>  
 <script>
-    function onSignIn(response) {                
-        window.location.replace("/dashboard.html#credential=" + response.credential);        
-    }        
+    // Google Sign-in (new)
+    auth2 = gapi.auth2.init();
+    auth2.attachClickHandler('signinButton', additionalParams, onSignIn, onSignInFailure);     
+
+    // Google Sign-in (new)
+    function onSignIn(googleUser) {
+      console.log(googleUser)
+    }
+    function onSignInFailure() {
+      // Handle sign-in errors
+    }
 </script>
 <script>
   
