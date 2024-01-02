@@ -23,12 +23,19 @@
     const [accessToken, tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
         
     const credential = fragment.get('credential');
+
+    const facebook = fragment.get('fb_name');
     
 
     if(credential){
         const googleData = decodeJwtResponse(credential)
         document.getElementById('name').innerText = googleData.email;
         document.getElementById("avatar").src = googleData.picture;
+    }
+
+    if(facebook){
+        
+        document.getElementById('name').innerText = facebook;        
     }
 
         
