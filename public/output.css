@@ -560,6 +560,17 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(114 137 218 / var(--tw-bg-opacity));
 }
 
+.bg-facebook {
+  --tw-bg-opacity: 1;
+  background-color: rgb(66 103 178 / var(--tw-bg-opacity));
+}
+
+.bg-google {
+  --tw-bg-opacity: 1;
+  background-color: #DB4437;
+  
+}
+
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
