@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <base href="/">  
-  <link rel="stylesheet" type="text/css" href="/login/public/output.css" >
+  <link rel="stylesheet" type="text/css" href="output.css" >
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />  
   <script src="https://accounts.google.com/gsi/client" async defer></script>  
 </head>
@@ -42,7 +42,7 @@
 </body>
 <script>
     function onSignIn(response) {                
-        window.location.replace("/login/dashboard.html#credential=" + response.credential);        
+        window.location.replace("/dashboard.html#credential=" + response.credential);        
     }        
 </script>
 <script>
@@ -77,7 +77,7 @@
                        FB.api('/me', {fields: 'name, email'}, function(response) {
                            console.log(response)
                         //    document.getElementById("profile").innerHTML = "Good to see you, " + response.name + ". i see your email address is " + response.email
-                           window.location.replace("/login/dashboard.html#fb=" + response);
+                           window.location.replace("dashboard.html#fb=" + response);
                        });
                   } else { 
                       //  <!-- If you are not logged in, the login dialog will open for you to login asking for permission to get your public profile and email -->
