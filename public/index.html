@@ -6,58 +6,59 @@
   <base href="/">  
   <link rel="stylesheet" type="text/css" href="output.css" >
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />  
+  
   <script src="https://accounts.google.com/gsi/client" onload="console.log('TODO: add onload function')">
   </script>  
 </head>
 <body>
-  <script>
-    const client = google.accounts.oauth2.initCodeClient({
-      client_id: '353389008600-n0igs2s58igstkdkp9ckb5v53d9tq6eu.apps.googleusercontent.com',
-      scope: 'https://www.googleapis.com/auth/calendar.readonly',
-      ux_mode: 'popup',
-      callback: (response) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', code_receiver_uri, true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        // Set custom header for CRSF
-        xhr.setRequestHeader('X-Requested-With', 'XmlHttpRequest');
-        xhr.onload = function() {
-          console.log('Auth code response: ' + xhr.responseText);
-        };
-        xhr.send('code=' + response.code);
-      },
-    });
-
-    function onSignIn(response) {                
-        window.location.replace("/login/dashboard.html#credential=" + response.credential);        
-    }        
-  </script>  
+  
     <div class="flex space-x-4 items-center justify-center h-screen bg-discord-gray text-white" >
         
-        <!-- <a id="login" href="https://discord.com/api/oauth2/authorize?client_id=1190562511582408744&response_type=token&redirect_uri=http%3A%2F%2Flocalhost%3A53134%2Fauth%2F&scope=identify" class="bg-discord-blue  text-xl px-5 py-3 rounded-md font-bold flex items-center space-x-4 hover:bg-gray-600 transition duration-75"><i class="fa-brands fa-discord text-2xl"></i>
-            <span>Login with Discord</span>
-        </a> -->
+        <!-- discord login code with button -->
         <a id="login" 
           href="https://discord.com/api/oauth2/authorize?client_id=1190562511582408744&response_type=token&redirect_uri=https%3A%2F%2Floginpagess.vercel.app%2Fdashboard.html&scope=identify" 
           class="bg-discord-blue  text-xl px-5 py-3 rounded-md font-bold flex items-center space-x-4 hover:bg-gray-600 transition duration-75"><i class="fa-brands fa-discord text-2xl"></i>
           <!-- <span>Login with Discord</span> -->
         </a>
 
+        <!-- facebook button code -->
         <button class="bg-facebook text-xl px-5 py-3 rounded-md font-bold flex items-center space-x-4 hover:bg-gray-600 transition duration-75" onclick="fb_login()"> <i class="fa-brands fa-facebook text-2xl"></i></button>
-        
+
+        <!-- google button code -->
         <button id="signinButton" onclick="client.requestCode()" class="bg-google text-xl px-5 py-3 rounded-md font-bold flex items-center space-x-4 hover:bg-gray-600 transition duration-75" > <i class="fa-brands fa-google text-2xl" style="color: #ffffff; "></i></button>                
                         
     </div>    
 </body>
-<!-- <script src="https://accounts.google.com/gsi/client" async defer></script>   -->
+
+<!-- google login code -->
 <script>
+  const client = google.accounts.oauth2.initCodeClient({
+    client_id: '353389008600-n0igs2s58igstkdkp9ckb5v53d9tq6eu.apps.googleusercontent.com',
+    scope: 'https://www.googleapis.com/auth/calendar.readonly',
+    ux_mode: 'popup',
+    callback: (response) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', code_receiver_uri, true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      // Set custom header for CRSF
+      xhr.setRequestHeader('X-Requested-With', 'XmlHttpRequest');
+      xhr.onload = function() {
+        console.log('Auth code response: ' + xhr.responseText);
+      };
+      xhr.send('code=' + response.code);
+    },
+  });
+
+  // callback function if needed
   function onSignIn(response) {                
-        window.location.replace("/login/dashboard.html#credential=" + response.credential);        
-    }        
-</script>
+      window.location.replace("/login/dashboard.html#credential=" + response.credential);        
+  }        
+</script>  
+
+<!-- facebook login code -->
 <script>
   
-    <!-- Add the Facebook SDK for Javascript -->
+    // Add the Facebook SDK for Javascript
 
     (function(d, s, id){
                           var js, fjs = d.getElementsByTagName(s)[0];
@@ -101,10 +102,6 @@
         // user is now logged out
       });
     }
-    
-
-
-    
-
+        
   </script>
 </html>
