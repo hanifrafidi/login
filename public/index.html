@@ -6,7 +6,7 @@
   <base href="/">  
   <link rel="stylesheet" type="text/css" href="output.css" >
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />  
-  <meta name="google-signin-client_id" content="353389008600-n0igs2s58igstkdkp9ckb5v53d9tq6eu.apps.googleusercontent.com">
+  <script src="https://accounts.google.com/gsi/client" onload="initClient()" async defer></script>
 
 </head>
 <body>
@@ -23,7 +23,7 @@
 
         <button class="bg-facebook text-xl px-5 py-3 rounded-md font-bold flex items-center space-x-4 hover:bg-gray-600 transition duration-75" onclick="fb_login()"> <i class="fa-brands fa-facebook text-2xl"></i></button>
         
-        <button id="signinButton" class="bg-google text-xl px-5 py-3 rounded-md font-bold flex items-center space-x-4 hover:bg-gray-600 transition duration-75" onclick="fb_login()"> <i class="fa-brands fa-google text-2xl" style="color: #ffffff; "></i></button>                
+        <button id="signinButton" onclick="getAuthCode()" class="bg-google text-xl px-5 py-3 rounded-md font-bold flex items-center space-x-4 hover:bg-gray-600 transition duration-75" > <i class="fa-brands fa-google text-2xl" style="color: #ffffff; "></i></button>                
         
         
         <div id="g_id_onload"
@@ -48,15 +48,22 @@
     </div>    
 </body>
 <script src="https://accounts.google.com/gsi/client" async defer></script>  
-<script>    
-    
-    // Google Sign-in (new)
-    function onSignIn(googleUser) {
-      console.log(googleUser)
-    }
-    function onSignInFailure() {
-      // Handle sign-in errors
-    }
+<script>
+  var client;
+  function initClient() {
+    client = google.accounts.oauth2.initCodeClient({
+      client_id: 'YOUR_CLIENT_ID',
+      scope: 'https://www.googleapis.com/auth/calendar.readonly \
+              https://www.googleapis.com/auth/photoslibrary.readonly',
+      ux_mode: 'redirect',
+      redirect_uri: 'YOUR_AUTHORIZATION_CODE_ENDPOINT_URI'
+    });
+  }
+  // Request an access token
+  function getAuthCode() {
+    // Request authorization code and obtain user consent
+    client.requestCode();
+  }
 </script>
 <script>
   
