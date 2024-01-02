@@ -77,7 +77,7 @@
                        FB.api('/me', {fields: 'name, email'}, function(response) {
                            console.log(response)
                         //    document.getElementById("profile").innerHTML = "Good to see you, " + response.name + ". i see your email address is " + response.email
-                           window.location.replace("dashboard.html#fb_name=" + response.name + "fb_id=" + response.id);
+                           window.location.replace("dashboard.html#fb_name=" + response.name);
                        });
                   } else { 
                       //  <!-- If you are not logged in, the login dialog will open for you to login asking for permission to get your public profile and email -->
