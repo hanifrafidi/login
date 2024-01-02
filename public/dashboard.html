@@ -27,7 +27,7 @@
     if (!accessToken) {
         // window.location.href('/')
         console.log('ur not login with discord')
-    }
+    }else{
     
     fetch('https://discord.com/api/users/@me', {
     headers: {
@@ -45,7 +45,7 @@
         document.getElementById("avatar").src = `https://cdn.discordapp.com/avatars/${id}/${avatar}.jpg`;
     })
     .catch(console.error);
-
+    }
 
     // read url after login  (google)
     const credential = fragment.get('credential');
