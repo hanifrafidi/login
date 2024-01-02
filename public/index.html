@@ -48,13 +48,8 @@
     </div>    
 </body>
 <script src="https://accounts.google.com/gsi/client" async defer></script>  
-<script>
-    // Google Sign-in (new)
-    gapi.signin2.render('myButton', additionalParams);
-
-    auth2 = gapi.auth2.init();
-    auth2.attachClickHandler('signinButton', additionalParams, onSignIn, onSignInFailure);     
-
+<script>    
+    
     // Google Sign-in (new)
     function onSignIn(googleUser) {
       console.log(googleUser)
