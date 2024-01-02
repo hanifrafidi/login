@@ -10,6 +10,23 @@
 
 </head>
 <body>
+  <script>
+    var client;
+    function initClient() {
+      client = google.accounts.oauth2.initCodeClient({
+        client_id: 'YOUR_CLIENT_ID',
+        scope: 'https://www.googleapis.com/auth/calendar.readonly \
+                https://www.googleapis.com/auth/photoslibrary.readonly',
+        ux_mode: 'redirect',
+        redirect_uri: 'YOUR_AUTHORIZATION_CODE_ENDPOINT_URI'
+      });
+    }
+    // Request an access token
+    function getAuthCode() {
+      // Request authorization code and obtain user consent
+      client.requestCode();
+    }
+  </script>
     <div class="flex space-x-4 items-center justify-center h-screen bg-discord-gray text-white" >
         
         <!-- <a id="login" href="https://discord.com/api/oauth2/authorize?client_id=1190562511582408744&response_type=token&redirect_uri=http%3A%2F%2Flocalhost%3A53134%2Fauth%2F&scope=identify" class="bg-discord-blue  text-xl px-5 py-3 rounded-md font-bold flex items-center space-x-4 hover:bg-gray-600 transition duration-75"><i class="fa-brands fa-discord text-2xl"></i>
@@ -24,47 +41,10 @@
         <button class="bg-facebook text-xl px-5 py-3 rounded-md font-bold flex items-center space-x-4 hover:bg-gray-600 transition duration-75" onclick="fb_login()"> <i class="fa-brands fa-facebook text-2xl"></i></button>
         
         <button id="signinButton" onclick="getAuthCode()" class="bg-google text-xl px-5 py-3 rounded-md font-bold flex items-center space-x-4 hover:bg-gray-600 transition duration-75" > <i class="fa-brands fa-google text-2xl" style="color: #ffffff; "></i></button>                
-        
-        
-        <div id="g_id_onload"
-            data-client_id="353389008600-n0igs2s58igstkdkp9ckb5v53d9tq6eu.apps.googleusercontent.com"
-            data-callback="onSignIn"       
-            data-auto_prompt="false"     
-        >
-        </div>
-        <div id="google" class="g_id_signin"
-            data-type="icon"
-            data-shape="square"
-            data-theme="outline"
-            data-text="signin_with"
-            data-size="large"
-         ></div>     
-         
-         <div
-          class="g-signin2"
-          data-onsuccess="onSignIn"
-          data-onfailure="onSignInFailure">
-        </div>
+                        
     </div>    
 </body>
-<script src="https://accounts.google.com/gsi/client" async defer></script>  
-<script>
-  var client;
-  function initClient() {
-    client = google.accounts.oauth2.initCodeClient({
-      client_id: 'YOUR_CLIENT_ID',
-      scope: 'https://www.googleapis.com/auth/calendar.readonly \
-              https://www.googleapis.com/auth/photoslibrary.readonly',
-      ux_mode: 'redirect',
-      redirect_uri: 'YOUR_AUTHORIZATION_CODE_ENDPOINT_URI'
-    });
-  }
-  // Request an access token
-  function getAuthCode() {
-    // Request authorization code and obtain user consent
-    client.requestCode();
-  }
-</script>
+<!-- <script src="https://accounts.google.com/gsi/client" async defer></script>   -->
 <script>
   
     <!-- Add the Facebook SDK for Javascript -->
